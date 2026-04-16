@@ -13,19 +13,20 @@ li{
     font-style:italic;
     background-color: none;
     text-align:left;
-    color:white;
+    color:grey;
 }
 h1{
     background-color: none;
     text-align: center;
-    color:white;
+    color:black;
 }
 h2{
     background-color: none;
-    color:lightblue;
+    color:orange;
     text-align: center;
 }
 body {
     background-image: url(../assets/img/backgroundimage.png);
     text-align: left;
 }
+	
