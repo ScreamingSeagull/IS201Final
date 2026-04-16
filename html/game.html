@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Click the Button game!</title>
+        <link rel="icon" type="image/x-icon" href="../assets/img/icon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="../css/styles.css" rel="stylesheet" />
+    </head>
+<body style="font-family: Arial, sans-serif; text-align: center;">
+    <a href="../index.html" style="background-color:rgb(255, 255, 255);" id="top">Back to the scratch page</a><br>
+    <div 
+        id="click-game"
+        style="background: #f0f8ff; padding: 20px;">
+        
+        <h1>Click the Button!</h1>
+        <p>You have 10 seconds. Click the moving button as many times as you can.</p>
+        <button 
+        id="start"
+        style="margin-top: 20px; padding: 10px 20px;">
+        Start Game
+        </button>
+        <p>Score: <span id="score">0</span></p>
+        <div 
+        id="game-area"
+        style="width: 100%; height: 400px; border: 2px solid #333; position: relative; margin-top: 20px;">
+        <button 
+            id="button" 
+            style="display: none; position: absolute; padding: 10px 20px; background: #84f3ea; color: rgb(216, 252, 255); border: none; cursor: pointer; border-radius: 5px;">
+            Click me!
+        </button>
+        </div>
+    </div>
+<script>
+  const startBtn = document.getElementById('start');
+  const gameArea = document.getElementById('game-area');
+  const clickBtn = document.getElementById('button');
+  const scoreDisplay = document.getElementById('score');
+  let score = 0;
+  let gameActive = false;
+  let gameTimer;
+
+  function moveButton() {
+    const areaWidth = gameArea.clientWidth - clickBtn.offsetWidth;
+    const areaHeight = gameArea.clientHeight - clickBtn.offsetHeight;
+
+    const x = Math.random() * areaWidth;
+    const y = Math.random() * areaHeight;
+
+    clickBtn.style.left = `${x}px`;
+    clickBtn.style.top = `${y}px`;
+  }
+
+  clickBtn.addEventListener('click', () => {
+    if (!gameActive) return;
+    score++;
+    scoreDisplay.textContent = score;
+    moveButton();
+  });
+
+  startBtn.addEventListener('click', () => {
+    score = 0;
+    scoreDisplay.textContent = score;
+    gameActive = true;
+    clickBtn.style.display = 'block';
+    moveButton();
+
+    gameTimer = setTimeout(() => {
+      gameActive = false;
+      clickBtn.style.display = 'none';
+      alert(`Time's up! Your score is ${score}`);
+    }, 10000);
+  });
+</script>
+</body>
